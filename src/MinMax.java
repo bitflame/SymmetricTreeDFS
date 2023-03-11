@@ -1,4 +1,3 @@
-import edu.princeton.cs.algs4.In;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +29,9 @@ public class MinMax {
         long min = 1000000000;
         long max = 0;
         long sum = 0;
-        long n = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            n = arr.get(i);
+        long n ;
+        for (Integer integer : arr) {
+            n = integer;
             sum += n;
             if (max < n) {
                 max = n;
