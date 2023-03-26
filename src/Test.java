@@ -48,7 +48,7 @@ public class Test {
         System.out.println(Math.log(4) / Math.log(2));
         System.out.println(Math.log(8) / Math.log(2));
         System.out.println(Math.log(16) / Math.log(2));
-
+        /********************************************************************/
         List<Integer> teamSize = new ArrayList<>(Arrays.asList(1, 2, 2, 3, 4));
         System.out.println(reduceTeamSize(teamSize, 2));
 
