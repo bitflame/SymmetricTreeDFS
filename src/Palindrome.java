@@ -6,11 +6,11 @@ public class Palindrome {
     public int longestPalindrome(String s) {
         int result = 0;
         if (s.length() == 1) return 1;
-        Set<Character> set = new HashSet<Character>();
+        Set<Character> set = new HashSet<>();
         for (char c : s.toCharArray()) {
             if (!set.contains(c)) {
                 set.add(c);
-            } else if (set.contains(c)) {
+            } else {
                 set.remove(c);
                 result += 2;
             }
@@ -32,6 +32,6 @@ public class Palindrome {
         System.out.println("Test 4 - Expecting 2; Getting: " + palindrome.longestPalindrome("bb"));
         System.out.println("Test 5 - Expecting 0; Getting: " + palindrome.longestPalindrome(""));
         System.out.println("Test 6 - Expecting 3; Getting: " + palindrome.longestPalindrome("ccc"));
-        System.out.println("Test 6 - Expecting 1; Getting: " + palindrome.longestPalindrome("AB"));
+        System.out.println("Test 7 - Expecting 1; Getting: " + palindrome.longestPalindrome("AB"));
     }
 }
