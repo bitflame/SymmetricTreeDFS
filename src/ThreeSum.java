@@ -10,43 +10,47 @@ public class ThreeSum {
     public static List<List<Integer>> threeSum(int[] nums) {
         int m = nums.length;
         List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
         return sum(3, nums, m, result);
     }
 
     private static List<List<Integer>> sum(int ksum, int[] nums, int targetIndex, List<List<Integer>> result) {
-        List<List<Integer>> newList = new ArrayList<>();
+
         if (ksum == 2) {
-            for (int i = targetIndex; i > 0; i--) {
+            for (int i = targetIndex; i > 1; i--) {
                 for (List l : twoSum(nums, i)) {
                     l.add(nums[i]);
-                    newList.add(l);
+                    result.add(l);
                 }
             }
         } else {
+            result = sum(--ksum, nums, --targetIndex, result);
+            List<List<Integer>> newList = new ArrayList<>();
             for (List l : result) {
                 int sum = 0;
                 for (Object o : l) {
                     int current = (Integer) o;
                     sum += current;
                 }
-                if (sum == nums[targetIndex]) {
-                    l.add(nums[targetIndex]);
+                if (sum == 0) {
                     newList.add(l);
                 }
             }
             result = newList;
         }
-        return sum(--ksum, nums, --targetIndex, result);
+        return result;
     }
 
     private static List<List<Integer>> twoSum(int[] nums, int targetIndex) {
         List<Integer> match = new ArrayList<>();
         List<List<Integer>> result = new ArrayList<>();
         int target = nums[targetIndex];
-        for (int i = 0; i < nums.length - 2; i++) {
-            if (i == targetIndex) continue;
-            for (int j = i + 1; j < nums.length - 1; j++) {
-                if (j == targetIndex) continue;
+        // for (int i = 0; i < nums.length - 2; i++) {
+        for (int i = 0; i < targetIndex - 1; i++) {
+            //if (i == targetIndex) continue;
+            //for (int j = i + 1; j < nums.length - 1; j++) {
+            for (int j = i + 1; j < targetIndex; j++) {
+                //if (j == targetIndex) continue;
                 if (nums[i] + nums[j] == -target) {
                     match.add(nums[i]);
                     match.add(nums[j]);
