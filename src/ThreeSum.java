@@ -21,6 +21,7 @@ public class ThreeSum {
                 for (List l : twoSum(nums, i)) {
                     l.add(nums[i]);
                     result.add(l);
+                    if (nums[i]==nums[i-1]) i--;
                 }
             }
         } else {
@@ -52,10 +53,16 @@ public class ThreeSum {
             for (int j = i + 1; j < targetIndex; j++) {
                 //if (j == targetIndex) continue;
                 if (nums[i] + nums[j] == -target) {
-                    match.add(nums[i]);
-                    match.add(nums[j]);
-                    result.add(match);
-                    match = new ArrayList<>();
+                    if (match.isEmpty()) {
+                        match.add(nums[i]);
+                        match.add(nums[j]);
+                        result.add(match);
+                    } else if (match.get(0) != nums[i] && match.get(1) != nums[j]) {
+                        match = new ArrayList<>();
+                        match.add(nums[i]);
+                        match.add(nums[j]);
+                        result.add(match);
+                    }
                 }
             }
         }
@@ -65,7 +72,6 @@ public class ThreeSum {
     private static List<List<Integer>> test(int[] nums, List<List<Integer>> result, int targetIndex) {
         result.get(0).add(nums[targetIndex]);
         return test(nums, result, --targetIndex);
-
     }
 
     private static void printList(List<List<Integer>> list) {
