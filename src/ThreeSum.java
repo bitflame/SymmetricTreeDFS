@@ -2,6 +2,7 @@
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ThreeSum {
@@ -14,20 +15,47 @@ public class ThreeSum {
 
     private static List<List<Integer>> sum(int ksum, int[] nums, int targetIndex, List<List<Integer>> result) {
         List<List<Integer>> newList = new ArrayList<>();
-        for (List l : result) {
-            int sum = 0;
-            for (Object o : l) {
-                int current = (Integer) o;
-                sum += current;
+        if (ksum == 2) {
+            for (int i = targetIndex; i > 0; i--) {
+                for (List l : twoSum(nums, i)) {
+                    l.add(nums[i]);
+                    newList.add(l);
+                }
             }
-            if (sum == nums[targetIndex]) {
-                l.add(nums[targetIndex]);
-                newList.add(l);
+        } else {
+            for (List l : result) {
+                int sum = 0;
+                for (Object o : l) {
+                    int current = (Integer) o;
+                    sum += current;
+                }
+                if (sum == nums[targetIndex]) {
+                    l.add(nums[targetIndex]);
+                    newList.add(l);
+                }
+            }
+            result = newList;
+        }
+        return sum(--ksum, nums, --targetIndex, result);
+    }
+
+    private static List<List<Integer>> twoSum(int[] nums, int targetIndex) {
+        List<Integer> match = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
+        int target = nums[targetIndex];
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i == targetIndex) continue;
+            for (int j = i + 1; j < nums.length - 1; j++) {
+                if (j == targetIndex) continue;
+                if (nums[i] + nums[j] == -target) {
+                    match.add(nums[i]);
+                    match.add(nums[j]);
+                    result.add(match);
+                    match = new ArrayList<>();
+                }
             }
         }
-        result = newList;
-        if (ksum == 2) return result;
-        return sum(--ksum, nums, --targetIndex, result);
+        return result;
     }
 
     private static List<List<Integer>> test(int[] nums, List<List<Integer>> result, int targetIndex) {
