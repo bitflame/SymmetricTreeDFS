@@ -15,13 +15,12 @@ public class ThreeSum {
     }
 
     private static List<List<Integer>> sum(int ksum, int[] nums, int targetIndex, List<List<Integer>> result) {
-
         if (ksum == 2) {
             for (int i = targetIndex; i > 1; i--) {
                 for (List l : twoSum(nums, i)) {
                     l.add(nums[i]);
                     result.add(l);
-                    if (nums[i]==nums[i-1]) i--;
+                    if (nums[i] == nums[i - 1]) i--;
                 }
             }
         } else {
@@ -102,6 +101,10 @@ public class ThreeSum {
         printList(threeSum(nums));
         nums = new int[]{-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4};
         StdOut.print("Test 5 - Expecting [[-4,0,4],[-4,1,3],[-3,-1,4],[-3,0,3],[-3,1,2],[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]] Getting: ");
+        printList(threeSum(nums));
+        // [0,2,2,3,0,1,2,3,-1,-4,2]
+        nums = new int[]{0, 2, 2, 3, 0, 1, 2, 3, -1, -4, 2};
+        StdOut.print("Test 6 - Expecting [[-4,1,3],[-4,2,2],[-1,0,1]] Getting: ");
         printList(threeSum(nums));
     }
 }
