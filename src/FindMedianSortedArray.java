@@ -5,7 +5,11 @@ public class FindMedianSortedArray {
         double med1 = 0, med2 = 0;
         int len1 = nums1.length;
         int len2 = nums2.length;
+
         if (len1 != 0) {
+            if (nums1[len1 - 1] < nums2[0]) {
+                return (double) (nums1[len1] + nums2[0]) / 2;
+            } else if (nums2[len2 - 1] < nums1[0]) return (double) (nums2[len2 - 1] + nums1[0]) / 2;
             if (len1 % 2 == 0) {
                 med1 = (double) (nums1[len1 / 2] + nums1[(len1 / 2) - 1]) / 2;
             } else {
@@ -13,6 +17,9 @@ public class FindMedianSortedArray {
             }
         }
         if (len2 != 0) {
+            if (nums1[len1 - 1] < nums2[0]) {
+                return (double) (nums1[len1] + nums2[0]) / 2;
+            } else if (nums2[len2 - 1] < nums1[0]) return (double) (nums2[len2 - 1] + nums1[0]) / 2;
             if (len2 % 2 == 0) {
                 med2 = (double) (nums2[len2 / 2] + nums2[(len2 / 2) - 1]) / 2;
             } else {
@@ -21,9 +28,10 @@ public class FindMedianSortedArray {
         }
         if (len1 == 0) return med2;
         else if (len2 == 0) return med1;
-        else if (med1 != med2) {
-            return (med1 + med2) / 2;
-        } else return med1;
+        else if (med1 >= med2) {
+            return med1;
+        } else return med2;
+
     }
 
     public static void main(String[] args) {
@@ -40,5 +48,8 @@ public class FindMedianSortedArray {
         nums1 = new int[]{};
         nums2 = new int[]{1};
         System.out.println("Expected Value: 1.0; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
+        nums1 = new int[]{2, 7};
+        nums2 = new int[]{1, 3};
+        System.out.println("Expected Value: 2.5; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
     }
 }
