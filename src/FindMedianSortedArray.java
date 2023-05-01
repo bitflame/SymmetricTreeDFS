@@ -1,0 +1,44 @@
+public class FindMedianSortedArray {
+    public double findMedianSortedArray(int[] nums1, int[] nums2) {
+        double result = 0;
+        // if the medians of each are the same value return it, else calculate the median of that value
+        double med1 = 0, med2 = 0;
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if (len1 != 0) {
+            if (len1 % 2 == 0) {
+                med1 = (double) (nums1[len1 / 2] + nums1[(len1 / 2) - 1]) / 2;
+            } else {
+                med1 = nums1[len1 / 2];
+            }
+        }
+        if (len2 != 0) {
+            if (len2 % 2 == 0) {
+                med2 = (double) (nums2[len2 / 2] + nums2[(len2 / 2) - 1]) / 2;
+            } else {
+                med2 = nums2[len2 / 2];
+            }
+        }
+        if (len1 == 0) return med2;
+        else if (len2 == 0) return med1;
+        else if (med1 != med2) {
+            return (med1 + med2) / 2;
+        } else return med1;
+    }
+
+    public static void main(String[] args) {
+        FindMedianSortedArray findMedianSortedArray = new FindMedianSortedArray();
+        int[] nums1 = {1, 3};
+        int[] nums2 = {2};
+        System.out.println("Expected Value: 2.0; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
+        nums1 = new int[]{1, 2};
+        nums2 = new int[]{3, 4};
+        System.out.println("Expected Value: 2.5; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
+        nums1 = new int[]{0, 0};
+        nums2 = new int[]{0, 0};
+        System.out.println("Expected Value: 0.0; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
+        nums1 = new int[]{};
+        nums2 = new int[]{1};
+        System.out.println("Expected Value: 1.0; Actual Value: " + findMedianSortedArray.findMedianSortedArray(nums1, nums2));
+    }
+}
